@@ -1,8 +1,13 @@
+import { styled } from "../styles"
+
+const Button = styled('button', {
+  backgroundColor: 'red',
+})
 
 export default function Home() {
   return (
     <>
-      <h1>hi</h1>
+      <Button>hi</Button>
     </>
   )
 }
