@@ -3,7 +3,7 @@ import { styled } from "..";
 export const HomeContainer = styled('main', {
    display: 'flex',
    width: '100%',
-   maxWidth: 'cal(100vw - ((100vw - 1180px)/ 2))',
+   maxWidth: 'calc(100vw - ((100vw - 1180px)/ 2))',
    marginLeft: 'auto',
    minHeight: 656,
 })
@@ -14,13 +14,14 @@ export const Product = styled('a', {
    cursor: 'pointer',
    position: 'relative',
    overflow: 'hidden',
+   marginLeft: '1rem',
 
    display: 'flex',
    alignContent: 'center',
    justifyContent: 'center',
 
    img: {
-    objectFit: 'cover'
+    objectFit: 'cover',
    },
 
    footer: {
