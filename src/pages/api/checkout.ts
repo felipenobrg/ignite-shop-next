@@ -2,20 +2,32 @@ import { stripe } from "@/lib/stripe";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    const priceId = ''
+  const { priceId } = req.body;
 
-    const sucessUrl = `${process.env.NEXT_URL}/sucess`
-    const cancel_url = `${process.env.NEXT_URL}/`
+  if (req.method != 'POST') {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-    const checkoutSession = await stripe.checkout.sessions.create({
-        success_url: sucessUrl,
-        cancel_url: cancel_url,
-        mode: "payment",
-        line_items: [
-            {
-                price: priceId,
-                quantity: 1,
-            }
-        ]
-    })
+  if (priceId) {
+    return res.status(400).json({ error: "Price not found" });
+  }
+
+  const sucessUrl = `${process.env.NEXT_URL}/sucess`;
+  const cancel_url = `${process.env.NEXT_URL}/`;
+
+  const checkoutSession = await stripe.checkout.sessions.create({
+    success_url: sucessUrl,
+    cancel_url: cancel_url,
+    mode: "payment",
+    line_items: [
+      {
+        price: priceId,
+        quantity: 1,
+      },
+    ],
+  });
+
+  return res.status(201).json({
+    checkoutUrl: checkoutSession.url,
+  });
 }
