@@ -2,6 +2,7 @@ import { HomeContainer, Product } from "@/styles/pages/Home";
 import Link from "next/link";
 import { stripe } from "../lib/stripe";
 import { GetStaticProps } from "next";
+import Head from "next/head";
 
 import Image from "next/image";
 import Stripe from "stripe";
@@ -17,6 +18,11 @@ interface HomeProps {
 
 export default function Home({ products }: HomeProps) {
   return (
+    <>
+     <Head>
+      <title>Home | Ignite Shop</title>
+     </Head>
+
     <HomeContainer>
       {products.map(product => {
         return (
@@ -37,6 +43,7 @@ export default function Home({ products }: HomeProps) {
         );
       })}
     </HomeContainer>
+    </>
   );
 }
 
